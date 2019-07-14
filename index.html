@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif
+        }
+
+        .tabela {
+            border: solid 1px;
+            width: fit-content;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="root-react"></div>
+
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+    <script type="text/babel">
+
+    const Tabela = ({numero, min , max }) => {
+        let lista = [0,1,2,3,4,5,6,7,8,9,10];
+
+        if( min >= 0 && max >= 0 ){
+            lista = [];
+
+            for(let i = min; i <= max; i++){
+                lista.push(i);
+            }
+        }
+
+        return (
+            <div className="tabela">
+                {
+                    lista.map((num, index) => {
+                        return (
+                            <p key={index}>{numero} x {num} = {numero * num}</p>
+                        )
+                    })
+                }
+            </div>
+        )
+    }
+
+    class Main extends React.Component {
+        render() {
+            return (
+                <div className="row">
+                    <Tabela  numero={3}  min={5} max={7}/>
+                    <Tabela  numero={7}  min={2} max ={5}/>
+                    <Tabela  numero={8} />
+                    <Tabela  numero={9} />
+                </div>
+            )
+        }
+    }
+
+    const ElementRoot = document.getElementById('root-react');
+     ReactDOM.render(<Main/>, ElementRoot);
+
+    </script>
+</body>
+
+</html>
